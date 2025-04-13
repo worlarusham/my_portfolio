@@ -9,6 +9,13 @@ const NotFound = () => {
   const containerRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
+  // Add fallback for Netlify static builds
+  useEffect(() => {
+    if (window.location.pathname !== '/404.html') {
+      window.history.replaceState({}, '', '/404.html');
+    }
+  }, []);
+
   // Mouse parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
