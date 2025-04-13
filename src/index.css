@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .mobile-container {
+    height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+
+  .mobile-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 3D Text Effect for both desktop and mobile */
+.text-3d {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  touch-action: manipulation; /* Improve touch behavior */
+}
+
+/* Desktop hover */
+@media (hover: hover) {
+  .text-3d:hover {
+    transform: translateY(-4px) translateZ(10px);
+  }
+}
+
+/* Mobile tap - remove the previous mobile-specific rules and replace with this */
+@media (hover: none) {
+  .text-3d:active {
+    transform: translateY(-4px) translateZ(10px);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Smooth section transitions */
+section {
+  transition: background-color 500ms ease;
+  will-change: background-color;
+}
+
+.snap-mandatory {
+  scroll-behavior: smooth;
+}
+
+/* Prevent flickering during transition */
+.snap-mandatory::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: background-color 500ms ease;
+}
